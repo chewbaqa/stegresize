@@ -18,12 +18,12 @@ fi
 hex_output=$(xxd -p "$1" | sed 's/\(..\)/\1 /g')
 
 # Display only the 9 bytes (18 digits) after "ff c0"
-hex_line=$(echo "$hex_output" | grep -o "ff c0.*" | cut -d ' ' -f 1-10)
+hex_line=$(echo "$hex_output" | grep -o "ff c0.*" | cut -d ' ' -f 1-9)
 echo "Original hex line: $hex_line"
 
 # Extract the image height and width in hex and convert them to decimal
-image_height_hex=$(echo "$hex_line" | cut -d ' ' -f 5-6 | tr -d ' ')
-image_width_hex=$(echo "$hex_line" | cut -d ' ' -f 7-8 | tr -d ' ')
+image_height_hex=$(echo "$hex_line" | cut -d ' ' -f 6-7 | tr -d ' ')
+image_width_hex=$(echo "$hex_line" | cut -d ' ' -f 8-9 | tr -d ' ')
 echo "Original image height in decimal: $((16#$image_height_hex))"
 echo "Original image width in decimal: $((16#$image_width_hex))"
 
@@ -36,8 +36,8 @@ new_image_height_hex=$(printf "%04x" "$new_image_height")
 new_image_width_hex=$(printf "%04x" "$new_image_width")
 
 # Replace the image height and width in the hex line
-new_hex_line=$(echo "$hex_line" | cut -d ' ' -f 1-4)
-new_hex_line="$new_hex_line ${new_image_height_hex:0:2} ${new_image_height_hex:2:2} ${new_image_width_hex:0:2} ${new_image_width_hex:2:2} $(echo "$hex_line" | cut -d ' ' -f 9-10)"
+new_hex_line=$(echo "$hex_line" | cut -d ' ' -f 1-5)
+new_hex_line="$new_hex_line ${new_image_height_hex:0:2} ${new_image_height_hex:2:2} ${new_image_width_hex:0:2} ${new_image_width_hex:2:2} $(echo "$hex_line" | cut -d ' ' -f 10)"
 echo "Modified hex line: $new_hex_line"
 
 # Replace the original hex line with the modified hex line in the original hex output
