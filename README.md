@@ -1,4 +1,5 @@
 # stegresize
 
 Usage:
-./stegresize.sh <image_file>
+
+`./stegresize.sh <image_file>`
