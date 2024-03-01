@@ -6,8 +6,8 @@ Usage:
 
 ## ![og](/example/office.jpg "Orginal Image")
 
-## ![og](/example/usage.png "Usage")
+## ![usage](/example/usage.png "Usage")
 
-## ![og](/example/result.png "Script Completion Successful")
+## ![success](/example/success.png "Script Completion Successful")
 
-![og](/example/final.png "Final Image")
+![final](/example/final.png "Final Image")
