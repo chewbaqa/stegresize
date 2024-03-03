@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+    echo "No file name provided. Usage: ./script.sh filename"
+    exit 1
+fi
+
+
+if [ ! -f "$1" ]
+then
+    echo "File not found!"
+    exit 1
+fi
+echo "
+  _________ __               __________              .__               
+ /   ______/  |_  ____   ____\______   \ ____   _____|__________ ____  
+ \_____  \\   ___/ __ \ / ___\|       __/ __ \ /  ___|  \___   _/ __ \ 
+ /        \|  | \  ___// /_/  |    |   \  ___/ \___ \|  |/    /\  ___/ 
+/_______  /|__|  \___  \___  /|____|_  /\___  /____  |__/_____ \\___  >
+        \/           \/_____/        \/     \/     \/         \/    \/                                                                                              
+"
+
+hex_output=$(xxd -p "$1" | sed 's/\(..\)/\1 /g')
+hex_line=$(echo "$hex_output" | grep -o "ff c0.*" | cut -d ' ' -f 1-9)
+echo "Original hex line: $hex_line"
+image_height_hex=$(echo "$hex_line" | cut -d ' ' -f 6-7 | tr -d ' ')
+image_width_hex=$(echo "$hex_line" | cut -d ' ' -f 8-9 | tr -d ' ')
+echo "Original image height in decimal: $((16#$image_height_hex))"
+echo "Original image width in decimal: $((16#$image_width_hex))"
+read -p "Enter the new image height in decimal: " new_image_height
+read -p "Enter the new image width in decimal: " new_image_width
+new_image_height_hex=$(printf "%04x" "$new_image_height")
+new_image_width_hex=$(printf "%04x" "$new_image_width")
+new_hex_line=$(echo "$hex_line" | cut -d ' ' -f 1-5)
+new_hex_line="$new_hex_line ${new_image_height_hex:0:2} ${new_image_height_hex:2:2} ${new_image_width_hex:0:2} ${new_image_width_hex:2:2} $(echo "$hex_line" | cut -d ' ' -f 10)"
+echo "Modified hex line: $new_hex_line"
+modified_hex_output=$(echo "$hex_output" | sed "s/$hex_line/$new_hex_line/")
+echo "$modified_hex_output"
+modified_hex_output=$(echo "$modified_hex_output" | tr -d ' ')
+echo "$modified_hex_output" | xxd -r -p > modified_image.jpg
+echo "A new image file 'modified_image.jpg' has been created."
