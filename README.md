@@ -2,7 +2,7 @@
 
 Usage:
 
-`./stegresize.sh <image_file>`
+`stegresize <image_file>`
 
 ## ![og](/example/office.jpg "Orginal Image")
 
@@ -10,7 +10,7 @@ Usage:
 
 ## ![success](/example/success.png "Script Completion Successful")
 
-![final](/example/final.png "Final Image")
+![final](/example/final.jpg "Final Image")
 
 ---
 
