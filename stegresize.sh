@@ -42,7 +42,6 @@ echo "Modified hex line: $new_hex_line"
 
 # Replace the original hex line with the modified hex line in the original hex output
 modified_hex_output=$(echo "$hex_output" | sed "s/$hex_line/$new_hex_line/")
-echo "$modified_hex_output"
 
 # Remove spaces from the modified hex output
 modified_hex_output=$(echo "$modified_hex_output" | tr -d ' ')

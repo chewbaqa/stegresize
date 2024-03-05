@@ -36,7 +36,6 @@ new_hex_line=$(echo "$hex_line" | cut -d ' ' -f 1-5)
 new_hex_line="$new_hex_line ${new_image_height_hex:0:2} ${new_image_height_hex:2:2} ${new_image_width_hex:0:2} ${new_image_width_hex:2:2} $(echo "$hex_line" | cut -d ' ' -f 10)"
 echo "Modified hex line: $new_hex_line"
 modified_hex_output=$(echo "$hex_output" | sed "s/$hex_line/$new_hex_line/")
-echo "$modified_hex_output"
 modified_hex_output=$(echo "$modified_hex_output" | tr -d ' ')
 echo "$modified_hex_output" | xxd -r -p > modified_image.jpg
 echo "A new image file 'modified_image.jpg' has been created."
