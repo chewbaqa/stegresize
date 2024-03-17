@@ -4,14 +4,21 @@ Usage:
 
 `stegresize <image_file>`
 
-## ![og](/example/office.jpg "Orginal Image")
+## Original Image
 
-## ![usage](/example/usage.png "Usage")
+![og](/example/office.jpg "Orginal Image")
 
-## ![success](/example/success.png "Script Completion Successful")
+## Utilising StegResize
+
+![usage](/example/usage.png "Usage")
+
+![success](/example/success.png "Script Completion Successful")
+
+## Final Image
 
 ![final](/example/final.jpg "Final Image")
 Flag : `HQ8{dc3f4d7cd6d33f8a903a71adeabeda5a}`
+
 ---
 
 # Installation
